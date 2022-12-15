@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <title>Blog Project</title>
+    <meta charset="utf-8">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- BS Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+    <!-- Medium style editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&display=swap" rel="stylesheet">
+
+  </head>
+  <body class="loader">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top techfont custom-navbar">
+      <div class="container">
+        <!-- Brand -->
+        <div class="navbar-header">
+          <a class="navbar-brand bigbrand" href="{% url 'post_list' %}">My Blog</a>
+        </div>
+
+        <!-- Navbar Hamburger Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Hamburger Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link" href="https://github.com/richardkhillah">Github</a> -->
+              <a class="nav-link" href="https://github.com/richardkhillah">
+                <span class="bi bi-github"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link" href="https://www.linkedin.com/in/richardkhillah/">LinkedIn</a> -->
+              <a class="nav-link" href="https://www.linkedin.com/in/richardkhillah/">
+                <span class="bi bi-linkedin"></span>
+              </a>
+            </li>
+          </ul>
+          <hr>
+          <ul class="navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'post_new' %}">New Post</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'post_draft_list' %}">Drafts</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
+              <li><a>Welcome {{ user.username }}!</a></li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">
+                  <span class="bi bi-person"></span>
+                  <!-- <i class="bi-person"></i> -->
+                </a>
+              </li>
+            {% endif %}
+
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+    <div class="content container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="blog_posts">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Scripts #}
+    <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+
+    <!-- Need to have JQuery and Javascript for DropDown Actions to work -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
