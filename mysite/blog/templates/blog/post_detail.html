@@ -30,6 +30,7 @@
 <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk%}">Add Comment</a>
 
 <div class="container">
+  <h4>Comments:</h4>
   {% for comment in post.comments.all %}
     <br>
     {% if user.is_authenticated or comment.approved_comment %}
